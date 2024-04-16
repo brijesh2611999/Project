@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNIST Digit Recognition</title>
+</head>
+<body>
+    <h1>MNIST Digit Recognition</h1>
+    <input type="file" id="fileInput"><br>
+    <button onclick="predict()">Upload</button>
+    <p>Uploaded Image:</p>
+    <img id="uploadedImage" src="" alt="Uploaded Image">
+    <p>Prediction:</p>
+    <div id="prediction"></div>
+
+    <script>
+        function predict() {
+            const inputElement = document.getElementById('fileInput');
+            const file = inputElement.files[0];
+
+            if (!file) {
+                alert('Please select an image file.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const img = document.getElementById('uploadedImage');
+                img.src = URL.createObjectURL(file);
+
+                const predictionElement = document.getElementById('prediction');
+                predictionElement.innerText = `Predicted Digit: ${data.prediction}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
