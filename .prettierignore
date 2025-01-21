@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 dist
 node_modules
 .next
@@ -11,3 +12,18 @@ pnpm-lock.yaml
 .env.development
 .env.test
 .env.production
+=======
+dist
+node_modules
+.next
+build
+.contentlayer
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+>>>>>>> 1ca3e246cfa94e274b203343bdbe1b1a02cc1c9f
